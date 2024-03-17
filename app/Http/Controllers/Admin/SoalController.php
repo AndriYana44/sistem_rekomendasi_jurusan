@@ -103,7 +103,6 @@ class SoalController extends Controller
 
     public function destroy($id)
     {
-        dd($id);
         Soal::where('id', $id)->delete();
         return redirect()->back()->with([
             'success' => true,

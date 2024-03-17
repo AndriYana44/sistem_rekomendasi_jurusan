@@ -83,8 +83,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/', [UserDashboardController::class, 'index'])->name('userDashboard');
         Route::prefix('question')->group(function () {
             Route::get('/rule', [QuestionController::class,'index'])->name('rule');
-            Route::get('/psikotes', [QuestionController::class,'psikotes'])->name('psikotes');
-            Route::get('/kejuruan', [QuestionController::class,'kejuruan'])->name('kejuruan');
+            Route::get('/psikotes', [QuestionController::class,'psikotes'])->name('psikotes')->middleware('answeredQuestionsPsikotes');
+            Route::get('/kejuruan', [QuestionController::class,'kejuruan'])->name('kejuruan')->middleware('answeredQuestionsKejuruan');
             Route::post('/set-temp-start-questions', [QuestionController::class, 'setTempStartQuestions'])->name('setTempStartQuestions');
             Route::post('hasil-test', [QuestionController::class, 'hasilTes'])->name('hasil-tes');
         });

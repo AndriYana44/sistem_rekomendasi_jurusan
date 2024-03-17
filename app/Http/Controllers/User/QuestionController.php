@@ -7,12 +7,23 @@ use App\Models\Admin\Soal;
 use App\Models\HasilTes;
 use App\Models\StartTest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class QuestionController extends Controller
 {
     public function index()
     {
-        return view("user.question.index");
+        $user_id = Auth::user()->id;
+        $userExist = DB::table('m_hasil_tes')
+                    ->where('user_id', $user_id)
+                    ->count();
+        
+        $soal_access = !$userExist ? true : false;
+
+        return view("user.question.index", [
+            'soal_access' => $soal_access
+        ]);
     }
 
     public function psikotes(Request $request)
@@ -27,7 +38,7 @@ class QuestionController extends Controller
 
     public function kejuruan()
     {
-        $soal = Soal::with('opsiJawaban')->where('kategori_soal', 'kejuruan')->paginate(10);
+        $soal = Soal::with('opsiJawaban')->where('kategori_soal', 'kejuruan')->get();
         $soal_count = Soal::where('kategori_soal', 'kejuruan')->count();
         return view('user.question.kejuruan', [
             'soal' => $soal,
@@ -59,10 +70,17 @@ class QuestionController extends Controller
             $psikotes->save();
         } 
 
-        return redirect()->back()->with([
-            'success' => true,
-            'message' => 'Anda akan diarahkan ke soal berikutnya, soal test kejuruan.'
-        ]);
+        if($request->jenis_tes == 'psikotes') {
+            return redirect('/question/kejuruan')->with([
+                'success' => true,
+                'message' => 'soal test kejuruan.'
+            ]);
+        }else{
+            return redirect('/')->with([
+                'success' => true,
+                'message' => 'Anda telah mengisi semua soal.'
+            ]);
+        }
     }
 
     public function setTempStartQuestions(Request $request)

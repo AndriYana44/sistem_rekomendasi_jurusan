@@ -4,14 +4,22 @@
 <div class="container mt-5">
     <div class="card wow fadeIn">
         <div class="card-body py-5 px-4">
-            <h1>Ketentuan Tes Psikometrik</h1>
-            <!-- Tambahkan ketentuan di sini -->
-            <p>1. Anda memiliki waktu tertentu untuk menyelesaikan setiap bagian tes. Pastikan untuk mengelola waktu dengan baik.</p>
-            <p>2. Pilih jawaban yang paling sesuai menurut Anda. Pastikan untuk menandai jawaban Anda dengan benar.</p>
-            <!-- ... -->
+            @if ($soal_access)
+                <h1>Ketentuan Tes Psikometrik</h1>
+                <!-- Tambahkan ketentuan di sini -->
+                <p>1. Anda memiliki waktu tertentu untuk menyelesaikan setiap bagian tes. Pastikan untuk mengelola waktu dengan baik.</p>
+                <p>2. Pilih jawaban yang paling sesuai menurut Anda. Pastikan untuk menandai jawaban Anda dengan benar.</p>
+                <!-- ... -->
+            @else
+                <h3>Anda Sudah Mengerjakan Soal.</h3>
+            @endif
         </div>
         <div class="card-footer">
-            <button class="btn btn-primary start">Mulai Tes</button>
+            @if ($soal_access)
+                <button class="btn btn-primary start">Mulai Tes</button>
+            @else
+                <a href="{{ route('userDashboard') }}" class="btn btn-primary">Lihat Hasil Tes</a>
+            @endif
         </div>
     </div>
 </div>
