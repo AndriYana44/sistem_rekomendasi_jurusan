@@ -76,10 +76,9 @@
   <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
   {{-- select2 --}}
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-  {{-- sweetalert --}}
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   {{-- ckeditor --}}
   <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   @yield('script')
 </body>
 

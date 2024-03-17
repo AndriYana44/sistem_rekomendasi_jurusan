@@ -35,14 +35,14 @@ class QuestionController extends Controller
         ]);
     }
 
-    function hasilTesPsikotes(Request $request)
+    function hasilTes(Request $request)
     {
         foreach($request->id_soal as $val) {
             $psikotes = new HasilTes();
             $psikotes->user_id = $request->user_id;
             $psikotes->soal_id = $val;
             $psikotes->opsi_jawaban_id = $request->$val == null ? 0 : $request->$val[0];
-            $psikotes->jenis_soal = 'psikotes';
+            $psikotes->jenis_soal = $request->jenis_tes;
 
             $jawaban = Soal::with(['opsiJawaban'])->where('id', $val)->get();
             foreach($jawaban->first()->opsiJawaban as $j) {

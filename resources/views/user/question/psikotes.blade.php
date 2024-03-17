@@ -14,7 +14,7 @@
     <div class="alert alert-primary" role="alert">
         <span>Kerjakan dengan jujur dan teliti</span>
     </div>
-    <form action="{{ route('hasil-tes-psikotes') }}" method="post">
+    <form action="{{ route('hasil-tes') }}" method="post">
         @csrf
         <input type="text" name="user_id" value="{{ auth()->user()->id }}" hidden>
         <div class="card mt-3">
@@ -27,6 +27,7 @@
                                 <div class="soal d-flex mt-3">
                                     {{ $key+1 }}. &nbsp; {!! $item->pertanyaan !!}
                                 </div>
+                                <input type="text" name="jenis_tes" value="psikotes" hidden>
                                 <input type="text" name="id_soal[]" value="{{ $item->id }}" hidden>
                                 <div class="jawaban-wrapper">
                                     @foreach ($item->opsiJawaban as $j)  
@@ -69,7 +70,7 @@
         });
         document.addEventListener('DOMContentLoaded', function () {
             // Menentukan waktu akhir countdown (8 menit dari waktu saat ini)
-            const countdownTime = new Date().getTime() + 1 * 60 * 1000; // 8 menit dalam milidetik
+            const countdownTime = new Date().getTime() + 10 * 60 * 1000; // 8 menit dalam milidetik
 
             // Update hitungan mundur setiap 1 detik
             const countdownTimer = setInterval(function () {

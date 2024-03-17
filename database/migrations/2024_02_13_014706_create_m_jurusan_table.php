@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('m_soal', function (Blueprint $table) {
+        Schema::create('m_kejuruan', function (Blueprint $table) {
             $table->id();
-            $table->string('tipe_soal')->nullable();
-            $table->text('pertanyaan');
-            $table->string('kategori_soal');
-            $table->string('level_soal');
+            $table->string('kejuruan');
             $table->timestamps();
         });
     }
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('m_soal');
+        Schema::dropIfExists('m_kejuruan');
     }
 };

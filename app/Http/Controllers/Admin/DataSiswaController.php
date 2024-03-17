@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Siswa;
+use App\Models\Kejuruan;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -12,8 +13,10 @@ class DataSiswaController extends Controller
     public function index() : object
     {
         $data = Siswa::all();
+        $kejuruan = Kejuruan::all();
         return view('admin.data_siswa.index', [
-            'data' => $data
+            'data' => $data,
+            'kejuruan' => $kejuruan
         ]);
     }
 

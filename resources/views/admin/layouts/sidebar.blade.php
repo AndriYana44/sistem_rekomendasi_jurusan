@@ -19,6 +19,13 @@
         </li><!-- End Profile Nav -->
 
         <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ route('data-kejuruan') }}">
+                <i class="bi bi-list"></i>
+                <span>Data Kejuruan</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#soal-nav" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-menu-button-wide"></i><span>Data Soal</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
@@ -42,12 +49,12 @@
             </a>
             <ul id="rapot-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="#">
-                        <i class="bi bi-circle"></i><span>Nilai Rapot</span>
+                    <a href="{{ route('nilai-kriteria') }}">
+                        <i class="bi bi-circle"></i><span>Nilai Kriteria</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{ route('nilai-un') }}">
                         <i class="bi bi-circle"></i><span>Nilai UN</span>
                     </a>
                 </li>
@@ -64,7 +71,7 @@
         <li class="nav-heading">Pages</li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="users-profile.html">
+            <a class="nav-link collapsed" href="{{ route('users') }}">
                 <i class="bi bi-person"></i>
                 <span>Users</span>
             </a>
