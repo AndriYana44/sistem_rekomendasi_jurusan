@@ -77,6 +77,11 @@ Route::group(['middleware' => ['auth']], function () {
                 Route::put('/update/{id}', [UserController::class, 'update'])->name('users-update');
                 Route::delete('/delete/{id}', [UserController::class, 'delete'])->name('users-delete');
             });
+
+            Route::prefix('hasil-tes')->group(function() {
+                Route::get('/kejuruan', [QuestionController::class, 'hasilTesKejuruan'])->name('hasil-tes-kejuruan');
+                Route::get('/psikotes', [QuestionController::class, 'hasilTesPsikotes'])->name('hasil-tes-psikotes');
+            });
         });
     });
     Route::group(['middleware' => ['cek_login:user']], function () {
@@ -88,5 +93,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/set-temp-start-questions', [QuestionController::class, 'setTempStartQuestions'])->name('setTempStartQuestions');
             Route::post('hasil-test', [QuestionController::class, 'hasilTes'])->name('hasil-tes');
         });
+
+        Route::post('start-test', [QuestionController::class, 'startTest'])->name('start-test');
     });
 });

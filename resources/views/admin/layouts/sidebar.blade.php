@@ -20,14 +20,14 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="{{ route('data-kejuruan') }}">
-                <i class="bi bi-list"></i>
+                <i class="bi bi-list-check"></i>
                 <span>Data Kejuruan</span>
             </a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#soal-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-menu-button-wide"></i><span>Data Soal</span><i class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-question-circle"></i><span>Data Soal</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="soal-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
@@ -45,7 +45,7 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#rapot-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-menu-button-wide"></i><span>Rapot Siswa</span><i class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-person-vcard"></i><span>Rapot Siswa</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="rapot-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
@@ -61,18 +61,36 @@
             </ul>
         </li>
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#">
-                <i class="bi bi-book"></i>
-                <span>Hasil Tes</span>
-            </a>
-        </li>
-
         <li class="nav-heading">Pages</li>
 
         <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#hasil-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-database-fill-check"></i><span>Hasil Tes Soal</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="hasil-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{ route('hasil-tes-kejuruan') }}">
+                        <i class="bi bi-circle"></i><span>Kejuruan</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('hasil-tes-psikotes') }}">
+                        <i class="bi bi-circle"></i><span>Psikotes</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ route('data-kejuruan') }}">
+                <i class="bi bi-database-fill-check"></i>
+                <span>Hasil Rekomendasi</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
             <a class="nav-link collapsed" href="{{ route('users') }}">
-                <i class="bi bi-person"></i>
+                <i class="bi bi-people-fill"></i>
                 <span>Users</span>
             </a>
         </li><!-- End Profile Nav -->

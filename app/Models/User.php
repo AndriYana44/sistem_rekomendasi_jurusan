@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Admin\Siswa;
+use App\Models\HasilTes;
+use App\Models\StartTest;
 
 class User extends Authenticatable
 {
@@ -44,4 +47,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // join to siswa
+    public function siswa()
+    {
+        return $this->belongsTo(Siswa::class, 'siswa_id', 'id');
+    }
+
+    // join to hasil tes   
+    public function hasilTes()
+    {
+        return $this->hasMany(HasilTes::class, 'user_id', 'id');
+    }
+
+    // join r_start_test
+    public function startTest()
+    {
+        return $this->hasMany(StartTest::class, 'user_id', 'id');
+    }
 }
