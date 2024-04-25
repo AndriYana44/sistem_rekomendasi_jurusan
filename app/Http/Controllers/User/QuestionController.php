@@ -11,6 +11,8 @@ use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Admin\Siswa;
 use stdClass;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class QuestionController extends Controller
 {
@@ -66,7 +68,7 @@ class QuestionController extends Controller
 
     public function kejuruan()
     {
-        $soal = Soal::with('opsiJawaban')->where('kategori_soal', 'kejuruan')->paginate(10);
+        $soal = Soal::with('opsiJawaban')->where('kategori_soal', 'kejuruan')->get();
         $soal_count = Soal::where('kategori_soal', 'kejuruan')->count();
         return view('user.question.kejuruan', [
             'soal' => $soal,

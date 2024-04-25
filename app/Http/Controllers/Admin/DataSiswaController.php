@@ -32,7 +32,6 @@ class DataSiswaController extends Controller
             'tempat_lahir' => $request->tempat_lahir,
             'tgl_lahir' => $request->tgl_lahir,
             'no_telp' => $request->no_hp,
-            'asal_sekolah' => $request->asal_sekolah,
             'email' => $request->email,
         ];
 

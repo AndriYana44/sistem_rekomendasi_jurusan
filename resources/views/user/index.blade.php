@@ -70,3 +70,18 @@
         </div>
     </div>
 @endsection
+
+@section('script')
+    <script>
+        $(document).ready(function () {
+            @if($msg = Session::get('message'))
+                console.log('oke');
+                swal.fire({
+                    text: "{{ $msg }}",
+                    confirmButtonText: "Oke",
+                    showCancelButton: true,
+                });
+            @endif
+        });
+    </script>
+@endsection
