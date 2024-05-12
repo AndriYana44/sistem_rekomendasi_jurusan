@@ -48,7 +48,7 @@
                                 <form action="{{ route('data-siswa-destroy', ['id' => $item->id]) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('delete')
-                                    <button type="submit" class="btn btn-danger btn-sm" id="deletesiswa">Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-sm deletesiswa">Delete</button>
                                 </form>
                                 <a href="#" class="btn btn-warning btn-sm">Edit</a>
                             </td>
@@ -171,12 +171,12 @@
                 });
 
                 // delete siswa action
-                $('#deletesiswa').on('click', function(e) {
+                $('.deletesiswa').on('click', function(e) {
                     e.preventDefault();
                     console.log('oke');
                     Swal.fire({
                         title: 'Apakah anda yakin?',
-                        text: "Data siswa akan dihapus secara permanen!",
+                        text: "Data siswa beserta nilai rapot & hasil test akan dihapus secara permanen!",
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: '#d33',

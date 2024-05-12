@@ -81,6 +81,12 @@ Route::group(['middleware' => ['auth']], function () {
             Route::prefix('hasil-tes')->group(function() {
                 Route::get('/kejuruan', [QuestionController::class, 'hasilTesKejuruan'])->name('hasil-tes-kejuruan');
                 Route::get('/psikotes', [QuestionController::class, 'hasilTesPsikotes'])->name('hasil-tes-psikotes');
+                Route::delete('/delete/kejuruan/{id}', [QuestionController::class, 'deleteHasilTesKejuruan'])->name('delete-hasil-tes-kejuruan');
+                Route::delete('/delete/psikotes/{id}', [QuestionController::class, 'deleteHasilTesPsikotes'])->name('delete-hasil-tes-psikotes');
+            });
+
+            Route::prefix('hasil-rekomendasi')->group(function() {
+                Route::get('/', [QuestionController::class, 'hasilRekomendasi'])->name('hasil-rekomendasi');
             });
         });
     });

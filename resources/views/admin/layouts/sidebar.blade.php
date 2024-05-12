@@ -82,7 +82,7 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="{{ route('data-kejuruan') }}">
+            <a class="nav-link collapsed" href="{{ route('hasil-rekomendasi') }}">
                 <i class="bi bi-database-fill-check"></i>
                 <span>Hasil Rekomendasi</span>
             </a>

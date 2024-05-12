@@ -35,6 +35,9 @@
   <!-- Template Main CSS File -->
   <link href="{{ asset('') }}assets/css/style.css" rel="stylesheet">
 
+  {{-- font awesome --}}
+  <link rel="stylesheet" href="{{ asset('') }}assets/font-awesome/css/font-awesome.min.css">
+
   <!-- =======================================================
   * Template Name: NiceAdmin
   * Updated: Nov 17 2023 with Bootstrap v5.3.2
@@ -78,7 +81,7 @@
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   {{-- ckeditor --}}
   <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   @yield('script')
 </body>
 

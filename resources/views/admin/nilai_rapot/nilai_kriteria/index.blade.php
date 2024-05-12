@@ -35,7 +35,7 @@
                                 <form class="d-inline" id="form-delete-kriteria-{{ $item->id }}" action="{{ route('nilai-kriteria-delete', $item->id) }}" method="POST">
                                     @csrf
                                     @method('delete')
-                                    <button class="btn btn-danger btn-sm" id="kriteria-delete-btn-{{ $item->id }}" onclick="deleteData({{ $item->id }})" type="button">Delete</button>
+                                    <button class="btn btn-danger btn-sm deletekriteria" onclick="deleteData({{ $item->id }})" type="button">Delete</button>
                                 </form>
                                 <a class="btn btn-warning btn-sm" href="#" data-bs-toggle="modal" data-bs-target="#editKriteria{{ $item->id }}">Edit</a>
                             </td>
@@ -147,20 +147,27 @@
 
 @section('script')
     <script>
-        function deleteData(id) {
-            swal({
-                title: "Anda yakin?",
-                text: "Data yang dihapus tidak dapat dikembalikan!",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-            .then((willDelete) => {
-                if (willDelete) {
-                    $(`#form-delete-kriteria-${id}`).submit();
+        // delete kriteria action
+        $('.deletekriteria').on('click', function(e) {
+            e.preventDefault();
+            console.log('oke');
+            Swal.fire({
+                title: 'Apakah anda yakin?',
+                text: "Nilai kriteria akan dihapus secara permanen!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Hapus',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $(this).parent().submit();
+                }else{
+                    return false;
                 }
-            });
-        }
+            })
+        });
         
         $(document).ready(function () {
             @if(session('success'))

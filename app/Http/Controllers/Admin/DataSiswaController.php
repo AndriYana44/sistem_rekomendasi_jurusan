@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Siswa;
+use App\Models\HasilTes;
 use App\Models\Kejuruan;
+use App\Models\NilaiKriteria;
+use App\Models\NilaiUN;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -65,8 +68,35 @@ class DataSiswaController extends Controller
     {
         // delete data siswa
         Siswa::destroy($id);
-        // delete data user
+        
+        // delete user
         User::where('siswa_id', $id)->delete();
+
+        // delete Hasil Tes
+        $user = User::where('siswa_id', $id)->get();
+        $hasilTes = HasilTes::where('user_id', $user[0]->id)->get();
+        if($hasilTes->count() > 0) {
+            foreach($hasilTes as $item) {
+                $item->delete();
+            }
+        }
+
+        // delete nilai kriteria
+        $nilaiKriteria = NilaiKriteria::where('siswa_id', $id)->get();
+        if($nilaiKriteria->count() > 0) {
+            foreach($nilaiKriteria as $item) {
+                $item->delete();
+            }
+        }
+
+        // delete nilai un
+        $nilaiUN = NilaiUN::where('siswa_id', $id)->get();
+        if($nilaiUN->count() > 0) {
+            foreach($nilaiUN as $item) {
+                $item->delete();
+            }
+        }
+        
         return redirect()->route('data-siswa')->with('success', 'Data berhasil dihapus');
     }
 }

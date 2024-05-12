@@ -30,7 +30,7 @@
                     <form class="d-inline" action="{{ route('kejuruan-delete', $item->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>  
+                        <button type="submit" class="btn btn-danger btn-sm deletekejuruan">Hapus</button>  
                     </form>
                     <a href="#" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editKejuruan{{ $item->id }}">Edit</a>    
                 </td>
@@ -100,6 +100,27 @@
             @endif
 
             $('#kejuruan_table').DataTable();
+
+            $('.deletekejuruan').on('click', function(e) {
+                e.preventDefault();
+                console.log('oke');
+                Swal.fire({
+                    title: 'Apakah anda yakin?',
+                    text: "Data kejuruan akan dihapus secara permanen!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Hapus',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $(this).parent().submit();
+                    }else{
+                        return false;
+                    }
+                })
+            });
         });
     </script>
 @endsection

@@ -37,7 +37,7 @@
                                 <form class="d-inline" action="{{ route('delete-soal', ['id' => $item->id]) }}" method="POST">
                                     @csrf
                                     @method('delete')
-                                    <button type="submit" class="btn btn-danger btn-sm" id="delete_soal">Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-sm delete_soal">Delete</button>
                                 </form>
                                 <a href="#" class="btn btn-warning btn-sm editSiswa" data-bs-toggle="modal" data-bs-target="#editSiswa{{ $item->id }}">Edit</a>
                             </td>
@@ -253,9 +253,8 @@
                 });
 
                 // delete siswa action
-                $('#delete_soal').on('click', function(e) {
+                $('.delete_soal').on('click', function(e) {
                     e.preventDefault();
-                    console.log('oke');
                     Swal.fire({
                         title: 'Apakah anda yakin?',
                         text: "Data soal akan dihapus secara permanen!",

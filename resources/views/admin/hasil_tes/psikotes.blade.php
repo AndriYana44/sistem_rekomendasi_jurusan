@@ -37,13 +37,12 @@
                                 <td class="text-danger">Belum</td>
                             @endif
                             <td>
-                                <form class="d-inline" action="{{ route('delete-soal', ['id' => $item->id]) }}" method="POST">
+                                <form class="d-inline" action="{{ route('delete-hasil-tes-psikotes', ['id' => $item->id]) }}" method="POST">
                                     @csrf
                                     @method('delete')
-                                    <button type="submit" class="btn btn-danger btn-sm" id="delete_soal">Delete</button>
+                                    <button type="submit" class="btn btn-warning btn-sm deletehasiltes">Reset <i class="fa fa-refresh"></i></button>
                                 </form>
-                                <a href="#" class="btn btn-warning btn-sm editSiswa" data-bs-toggle="modal" data-bs-target="#editSiswa{{ $item->id }}">Edit</a>
-                                <a href="#" class="btn btn-info btn-sm">Detail</a>
+                                <a href="#" class="btn btn-primary btn-sm">Detail</a>
                             </td>
                         </tr>
                     @endforeach
@@ -51,4 +50,31 @@
             </table>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('#datasiswa').DataTable();
+            $('.deletehasiltes').on('click', function(e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Apakah anda yakin?',
+                    text: "Hasil tes Psikotes siswa akan direset!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#ffc107',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Ya, Reset!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $(this).parent().submit();
+                    }else{
+                        return false;
+                    }
+                })
+            });
+        });
+    </script>
 @endsection

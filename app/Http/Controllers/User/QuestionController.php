@@ -157,25 +157,36 @@ class QuestionController extends Controller
         $soal_jawaban = HasilTes::with(['soal', 'opsiJawaban', 'user'])
         ->where('jenis_soal', 'kejuruan')
         ->get();
-        
-        $soal_count = Soal::where('kategori_soal', 'kejuruan')->count();
 
         $user = User::with(['startTest' => function($query) {
             $query->where('jenis_soal', 'kejuruan');
         }])->get();
         
         foreach($user as $u) {
-            $jawaban_benar_count = HasilTes::with(['soal', 'opsiJawaban'])
-                ->where([
+            // check user exist in table hasil tes
+            $check_user = HasilTes::where('user_id', $u->id)->first();
+
+            $nilai = 0;
+            $soal_count = 0;
+            $jawaban_benar_count = 0;
+            if(!empty($check_user)) {
+                $soal_count += HasilTes::where([
                     'user_id' => $u->id,
-                    'jenis_soal' => 'kejuruan',
-                    'is_benar' => '1'
+                    'jenis_soal' => 'kejuruan'
                 ])->count();
+
+                $jawaban_benar_count += HasilTes::with(['soal', 'opsiJawaban'])
+                    ->where([
+                        'user_id' => $u->id,
+                        'jenis_soal' => 'kejuruan',
+                        'is_benar' => '1'
+                    ])->count();
+    
+                $nilai = ($jawaban_benar_count / $soal_count) * 100;
+            }
 
             if(!empty($u->siswa_id)) {
                 $siswa = Siswa::where('id', $u->siswa_id)->first();
-
-                $nilai = ($jawaban_benar_count/$soal_count) * 100;
 
                 $items = new stdClass();
                 $items->id = $u->id;
@@ -202,31 +213,42 @@ class QuestionController extends Controller
         $soal_jawaban = HasilTes::with(['soal', 'opsiJawaban', 'user'])
             ->where('jenis_soal', 'psikotes')
             ->get();
-        
-        $soal_count = Soal::where('kategori_soal', 'psikotes')->count();
     
         $user = User::with(['startTest' => function($query) {
             $query->where('jenis_soal', 'psikotes');
         }])->get();
         
         foreach($user as $u) {
-            $jawaban_benar_count = HasilTes::with(['soal', 'opsiJawaban'])
-                ->where([
+            // check user exist in table hasil tes
+            $check_user = HasilTes::where('user_id', $u->id)->first();
+
+            $nilai = 0;
+            $soal_count = 0;
+            $jawaban_benar_count = 0;
+            if(!empty($check_user)) {
+                $soal_count += HasilTes::where([
                     'user_id' => $u->id,
-                    'jenis_soal' => 'psikotes',
-                    'is_benar' => '1'
+                    'jenis_soal' => 'psikotes'
                 ])->count();
+
+                $jawaban_benar_count += HasilTes::with(['soal', 'opsiJawaban'])
+                    ->where([
+                        'user_id' => $u->id,
+                        'jenis_soal' => 'psikotes',
+                        'is_benar' => '1'
+                    ])->count();
+    
+                $nilai = ($jawaban_benar_count / $soal_count) * 100;
+            }
     
             if(!empty($u->siswa_id)) {
                 $siswa = Siswa::where('id', $u->siswa_id)->first();
-    
-                $nilai = ($jawaban_benar_count / $soal_count) * 100;
     
                 $items = new stdClass();
                 $items->id = $u->id;
                 $items->siswa = $siswa->nama;
                 $items->tipe_soal = 'psikotes';
-                $items->nilai = $nilai;
+                $items->nilai = round($nilai);
                 $items->is_done = !empty($u->startTest->first()->is_submit) ? 1 : 0;
     
                 array_push($nilai_siswa, $items);
@@ -238,5 +260,24 @@ class QuestionController extends Controller
             'jawaban_benar_count' => $jawaban_benar_count,
             'nilai_siswa' => $nilai_siswa
         ]);
+    }
+
+    public function deleteHasilTesKejuruan($id)
+    {
+        HasilTes::where(['user_id' => $id, 'jenis_soal' => 'kejuruan'])->delete();
+        StartTest::where(['user_id' => $id, 'jenis_soal' => 'kejuruan'])->delete();
+        return redirect()->route('hasil-tes-kejuruan')->with('success', 'Data berhasil dihapus');
+    }
+
+    public function deleteHasilTesPsikotes($id)
+    {
+        HasilTes::where(['user_id' => $id, 'jenis_soal' => 'psikotes'])->delete();
+        StartTest::where(['user_id' => $id, 'jenis_soal' => 'psikotes'])->delete();
+        return redirect()->route('hasil-tes-psikotes')->with('success', 'Data berhasil dihapus');
+    }
+
+    public function hasilRekomendasi()
+    {
+        return view('admin.hasil_rekomendasi.index');
     }
 }
