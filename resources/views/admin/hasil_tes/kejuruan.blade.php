@@ -63,9 +63,9 @@
                     text: "Hasil tes kejuruan siswa akan direset!",
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#d33',
+                    confirmButtonColor: '#ffc107',
                     cancelButtonColor: '#6c757d',
-                    confirmButtonText: 'Hapus',
+                    confirmButtonText: 'Ya, Reset!',
                     cancelButtonText: 'Batal'
                 }).then((result) => {
                     if (result.isConfirmed) {
