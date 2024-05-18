@@ -26,7 +26,7 @@
                                     <h3><i class="bi bi-people"></i></h3>
                                 </div>
                                 <div class="ps-3">
-                                    <h3>10 Siswa</h3>
+                                    <h3>{{ $siswa_counter }} Siswa</h3>
                                 </div>
                             </div>
                         </div>
@@ -41,8 +41,7 @@
                                     <i class="bi bi-people"></i>
                                 </div>
                                 <div class="ps-3">
-                                    <h4>4 Siswa</h4>
-                                    <span class="text-success small pt-1 fw-bold">4%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+                                    <h3>{{ $siswa_answered }} Siswa</h3>
                                 </div>
                             </div>
                         </div>
@@ -59,8 +58,7 @@
                                     <i class="bi bi-people"></i>
                                 </div>
                                 <div class="ps-3">
-                                    <h4>6 Siswa</h4>
-                                    <span class="text-success small pt-1 fw-bold">6%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+                                    <h3>{{ $siswa_counter - $siswa_answered }} Siswa</h3>
                                 </div>
                             </div>
                         </div>

@@ -2,6 +2,8 @@
 
 namespace App\Models\Admin;
 
+use App\Models\NilaiKriteria;
+use App\Models\NilaiUN;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
@@ -31,5 +33,15 @@ class Siswa extends Model
     public function user()
     {
         return $this->hasOne(User::class, 'siswa_id', 'id');
+    }
+
+    public function nilaiKriteria()
+    {
+        return $this->hasMany(NilaiKriteria::class, 'siswa_id', 'id');
+    }
+
+    public function nilaiUN()
+    {
+        return $this->hasMany(NilaiUN::class, 'siswa_id', 'id');
     }
 }

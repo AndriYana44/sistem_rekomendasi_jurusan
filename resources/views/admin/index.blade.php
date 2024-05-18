@@ -31,7 +31,7 @@
                                 <i class="bi bi-people"></i>
                             </div>
                             <div class="ps-3">
-                                <h6>1244</h6>
+                                <h6>{{ $siswa_counter }}</h6>
                             </div>
                         </div>
     
@@ -46,15 +46,15 @@
                 <div class="card info-card revenue-card">
 
                 <div class="card-body">
-                    <h5 class="card-title">Siswa <span>| Sudah Ujian</span></h5>
+                    <h5 class="card-title">Siswa <span>| Sudah Melakukan Tes</span></h5>
 
                     <div class="d-flex align-items-center">
                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                             <i class="bi bi-book"></i>
                         </div>
                         <div class="ps-3">
-                            <h6>64</h6>
-                            <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+                            <h6>{{ $siswa_answered }}</h6>
+                            <span class="text-success small pt-1 fw-bold">{{ round(($siswa_answered / $siswa_counter) * 100, 2) }}%</span>
 
                         </div>
                     </div>
@@ -68,15 +68,15 @@
                 <div class="card info-card sales-card">
 
                     <div class="card-body">
-                        <h5 class="card-title">Siswa <span>| Belum ujian</span></h5>
+                        <h5 class="card-title">Siswa <span>| Belum Melakukan Tes</span></h5>
 
                         <div class="d-flex align-items-center">
                             <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                 <i class="bi bi-book"></i>
                             </div>
                             <div class="ps-3">
-                                <h6>145</h6>
-                                <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+                                <h6>{{ $siswa_counter - $siswa_answered }}</h6>
+                                <span class="text-success small pt-1 fw-bold">{{ round((($siswa_counter - $siswa_answered) / $siswa_counter) * 100, 2) }}%</span>
                             </div>
                         </div>
                     </div>

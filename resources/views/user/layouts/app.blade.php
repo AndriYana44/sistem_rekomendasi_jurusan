@@ -56,9 +56,6 @@
                   <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{{ route('rule') }}">Soal tes</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Hasil tes</a>
-                  </li>
                 </ul>
             </div>
             <div class="d-flex">

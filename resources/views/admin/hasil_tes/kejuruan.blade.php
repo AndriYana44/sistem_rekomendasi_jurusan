@@ -30,7 +30,7 @@
                         <tr>
                             <td>{{ $item->siswa }}</td>
                             <td>{{ $item->tipe_soal }}</td>
-                            <td>{{ $item->nilai }}</td>
+                            <td>{{ round($item->nilai) }}</td>
                             @if($item->is_done == 1)
                                 <td class="text-success">Sudah</td>
                             @else

@@ -5,7 +5,7 @@
     <div class="card wow fadeIn">
         @if(is_null($has_start_test_kejuruan) && is_null($has_start_test_psikotes))
         <div class="card-body py-5 px-4">
-            @if ($soal_access)
+            @if ($has_start_test_kejuruan == null && $has_start_test_psikotes == null)
                 <h1>Ketentuan Tes Psikometrik</h1>
                 <!-- Tambahkan ketentuan di sini -->
                 <p>1. Anda memiliki waktu tertentu untuk menyelesaikan setiap bagian tes. Pastikan untuk mengelola waktu dengan baik.</p>
@@ -16,7 +16,7 @@
             @endif
         </div>
         <div class="card-footer">
-            @if ($soal_access)
+            @if ($has_start_test_kejuruan == null && $has_start_test_psikotes == null)
                 <button class="btn btn-primary start">Mulai Tes</button>
             @else
                 <a href="{{ route('userDashboard') }}" class="btn btn-primary">Lihat Hasil Tes</a>
@@ -33,9 +33,6 @@
         @else
         <div class="card-body py-5 px-4">
             <h3>Anda sudah melakukan tes</h3>
-        </div>
-        <div class="card-footer">
-            <button class="btn btn-primary start">Lihat Hasil Tes</button>
         </div>
         @endif
     </div>

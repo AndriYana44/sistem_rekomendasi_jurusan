@@ -19,8 +19,6 @@ class UserDashboardController extends Controller
             'siswa_counter' => $siswaCounter
         ];
 
-        return view('user.index', [
-            'data' => $data
-        ]);
+        return view('user.index', $data);
     }
 }
