@@ -14,10 +14,9 @@ class AdminDashboardController extends Controller
         $siswaCounter = DB::table('m_siswa')->count();
         // count siswa has answered the test
         $siswaAnswered = DB::table('m_hasil_tes')->select('user_id')->distinct()->get();
-        $data = [
+        return view('admin.index', [
             'siswa_counter' => $siswaCounter,
             'siswa_answered' => count($siswaAnswered)
-        ];
-        return view('admin.index', $data);
+        ]);
     }
 }

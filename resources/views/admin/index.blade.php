@@ -1,6 +1,7 @@
 @extends('admin.layouts.app');
 
 @section('content')
+{{-- {{ dd($siswa_counter) }} --}}
 <div class="pagetitle">
     <h1>Dashboard</h1>
     <nav>

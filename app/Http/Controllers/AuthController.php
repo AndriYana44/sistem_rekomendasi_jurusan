@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -14,12 +15,12 @@ class AuthController extends Controller
         // kondisi jika user nya ada 
         if($user) {
             // jika user nya memiliki level admin
-            if($user->level =='admin'){
-                return view('admin.index');
+            if($user->level == 'admin'){
+                return redirect('admin');
             }
             // jika user nya memiliki level user
             else if($user->level =='user'){
-                return view('user.index');
+                return redirect('userDashboard');
             }
         }
         return view('login');

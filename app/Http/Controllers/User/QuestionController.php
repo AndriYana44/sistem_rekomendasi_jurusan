@@ -280,10 +280,17 @@ class QuestionController extends Controller
 
     public function getNilaiHasilTes($tipe, $user_id, $kejuruan = null)
     {
-        $soal_count = HasilTes::where([
+        $soal_count = HasilTes::with(['soal', 'opsiJawaban']); 
+        $soal_count->where([
             'user_id' => $user_id,
             'jenis_soal' => $tipe
-        ])->count();
+        ]);
+        if($kejuruan != null) {
+            $soal_count->whereHas('soal', function ($query) use ($kejuruan) {
+                $query->where('tipe_soal', $kejuruan);
+            });
+        };
+        $soal_count = $soal_count->count();
 
         $q_jawaban_benar_count = HasilTes::with(['soal', 'opsiJawaban']);
         $q_jawaban_benar_count->where([
@@ -299,6 +306,8 @@ class QuestionController extends Controller
         }
 
         $jawaban_benar_count = $q_jawaban_benar_count->count();
+
+        // dd($jawaban_benar_count);
         return round(($jawaban_benar_count / $soal_count) * 100);
     }
 
@@ -316,7 +325,6 @@ class QuestionController extends Controller
             $nilai_siswa[$d->nama]['hasil_tes_psikotes'] = 0;
 
             if(!empty($check_user)) {
-                
                 $nilai_siswa[$d->nama]['hasil_tes_kejuruan']['tkj'] = $this->getNilaiHasilTes('kejuruan', $d->user->id, 'tkj') * 0.3;
                 $nilai_siswa[$d->nama]['hasil_tes_kejuruan']['rpl'] = $this->getNilaiHasilTes('kejuruan', $d->user->id, 'rpl') * 0.3;
                 $nilai_siswa[$d->nama]['hasil_tes_kejuruan']['animasi'] = $this->getNilaiHasilTes('kejuruan', $d->user->id, 'mm') * 0.3;
