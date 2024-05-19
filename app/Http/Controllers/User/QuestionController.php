@@ -307,7 +307,10 @@ class QuestionController extends Controller
 
         $jawaban_benar_count = $q_jawaban_benar_count->count();
 
-        // dd($jawaban_benar_count);
+        if($jawaban_benar_count == 0 || $soal_count == 0) {
+            return 0;
+        }
+        
         return round(($jawaban_benar_count / $soal_count) * 100);
     }
 
